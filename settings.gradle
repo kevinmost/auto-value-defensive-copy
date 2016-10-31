@@ -1,0 +1,4 @@
+rootProject.name = 'auto-value-defensive-copy'
+include 'processor'
+include 'adapter'
+

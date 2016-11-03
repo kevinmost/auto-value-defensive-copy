@@ -31,7 +31,6 @@ import javax.lang.model.element.Modifier.PRIVATE
 import javax.lang.model.element.Modifier.PROTECTED
 import javax.lang.model.element.Modifier.PUBLIC
 import javax.lang.model.element.Modifier.STATIC
-import javax.lang.model.type.TypeMirror
 
 open class DefensiveCopyExtension : AutoValueExtension() {
 
@@ -65,7 +64,7 @@ sealed class DefensivelyCopiedProperty(protected val context: Context, protected
   companion object {
     fun from(context: Context, property: AutoValueProperty): DefensivelyCopiedProperty {
       val copyAnnotation = property[DefensiveCopy::class]!!
-      val copierName: TypeName = (copyAnnotation["copier"] as TypeMirror).asTypeName
+      val copierName = copyAnnotation[DefensiveCopy::copier]
       return when (copierName) {
         DefensiveCopier::class.asTypeName -> DefaultDefensiveCopier(context, property)
         else -> CustomDefensiveCopier(context, property, copierName)

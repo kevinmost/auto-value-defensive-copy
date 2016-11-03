@@ -10,7 +10,7 @@ val Context.generateSuperclassConstructor: MethodSpec
             name = it.name,
             type = it.returnType,
             annotations = it.annotations
-                .filter { it.isNullityAnnotation }
+                .filter { it.annotationType.simpleName() in listOf("NotNull", "NonNull", "Nullable") }
                 .map { buildAnnotation(it.annotationType) }
         )
       }
